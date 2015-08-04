@@ -1,5 +1,6 @@
 import praw
 from ctypes import windll
+import urllib
 """
 Project which changes my wallpaper to anything in a selection of the top 5
 in the subreddit wallpapers.
@@ -29,11 +30,12 @@ def chooseWallpaper():
     return wallpaperUrlList[wallpaperIndex-1]
 
 
-user_agent = "Wallpaper 0.1"
+user_agent = "Wallpaper 0.2"
+#If there is a major error then change the user_agent
 r = praw.Reddit(user_agent = user_agent)
 subreddit = r.get_subreddit("wallpapers")
 
 chosenUrl = chooseWallpaper()
-
-SPI_SETDESKWALLPAPER = 20 
-windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, chosenUrl , 0)
+urllib.urlretrieve(chosenUrl,"000001.jpg")
+#SPI_SETDESKWALLPAPER = 20
+#windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, chosenUrl , 0)
